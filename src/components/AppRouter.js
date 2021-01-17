@@ -4,7 +4,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { CHAT_ROUTE, LOGIN_ROUTE } from "../utils/constants";
 
 const AppRouter = () => {
-  const isPrivate = true;
+  const isPrivate = false;
   return isPrivate ? (
     <Switch>
       {privateRoutes.map(({ path, Component }) => (
