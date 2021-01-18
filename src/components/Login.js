@@ -1,7 +1,17 @@
 import { Container, Grid, Box, Button } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "..";
+import firebase from "firebase";
 
 function Login() {
+  const { auth } = useContext(Context);
+
+  const handleLoginIn = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const { user } = await auth.signInWithPopup(provider);
+    console.log(user);
+  };
+
   return (
     <Container>
       <Grid
@@ -19,7 +29,9 @@ function Login() {
           direction={"column"}
         >
           <Box p={5}>
-            <Button variant={"outlined"}>Login In with google</Button>
+            <Button variant={"outlined"} onClick={handleLoginIn}>
+              Login In with google
+            </Button>
           </Box>
         </Grid>
       </Grid>

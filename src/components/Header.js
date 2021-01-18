@@ -1,17 +1,24 @@
 import { AppBar, Toolbar, Button, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { LOGIN_ROUTE } from "../utils/constants";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Context } from "../index";
 
 function Header() {
-  const isPrivate = true;
+  const { auth } = useContext(Context);
+  const [user] = useAuthState(auth);
+  const isPrivate = !!user;
+  const handleOut = () => auth.signOut();
   return (
     <div>
       <AppBar position="static">
         <Toolbar variant="dense">
           <Grid container justify={"flex-end"}>
             {isPrivate ? (
-              <Button variant={"outlined"}>Out</Button>
+              <Button variant={"outlined"} onClick={handleOut}>
+                Out
+              </Button>
             ) : (
               <NavLink to={LOGIN_ROUTE}>
                 <Button variant={"outlined"}>Login</Button>

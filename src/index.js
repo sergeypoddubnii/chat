@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import firebase from "firebase";
@@ -15,9 +15,20 @@ firebase.initializeApp({
   measurementId: "G-0Q49CGR5P7",
 });
 
+export const Context = createContext(null);
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Context.Provider
+    value={{
+      firebase,
+      auth,
+      firestore,
+    }}
+  >
     <App />
-  </React.StrictMode>,
+  </Context.Provider>,
   document.getElementById("root")
 );
