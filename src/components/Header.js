@@ -17,7 +17,7 @@ function Header() {
           <Grid container justify={"flex-end"}>
             {isPrivate ? (
               <Button variant={"outlined"} onClick={handleOut}>
-                Out
+                LogOut
               </Button>
             ) : (
               <NavLink to={LOGIN_ROUTE}>
